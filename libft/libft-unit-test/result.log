@@ -1,0 +1,177 @@
+ft_memset:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_bzero:      [MISSING]
+ft_memcpy:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_memmove:    [OK] [OK] [OK] [OK] [FAILED] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+[fail]: your memmove does not support the overlap (test 1)
+Test code:
+	char dst1[0xF0];
+	char dst2[0xF0];
+	char *data = "thiß ß\xde\xad\xbe\xeftriñg will be øvérlapéd !\r\n";
+	int size = 0xF0 - 0xF;
+
+	__builtin___memset_chk (dst1, 'A', sizeof(dst1), __builtin_object_size (dst1, 0));
+	__builtin___memset_chk (dst2, 'A', sizeof(dst2), __builtin_object_size (dst2, 0));
+	__builtin___memcpy_chk (dst1, data, strlen(data), __builtin_object_size (dst1, 0));
+	__builtin___memcpy_chk (dst2, data, strlen(data), __builtin_object_size (dst2, 0));
+	__builtin___memmove_chk (dst1 + 3, dst1, size, __builtin_object_size (dst1 + 3, 0));
+	ft_memmove(dst2 + 3, dst2, size);
+	if (!memcmp(dst1, dst2, size))
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+     memmove: |thithiß ßޭ��triñg will be øvérlapéd !
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAY|
+  ft_memmove: |thithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithiAAAAAAAAAAAAthithiß ßޭ��triñg will be øvérlapéd !
+AAAAAAAAAAAAAA|
+
+ft_memchr:     [MISSING]
+ft_memcmp:     [MISSING]
+ft_strlen:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_isalpha:    [OK] 
+ft_isdigit:    [OK] 
+ft_isalnum:    [OK] 
+ft_isascii:    [OK] 
+ft_isprint:    [OK] 
+ft_toupper:    [OK] 
+ft_tolower:    [OK] 
+ft_strchr:     [FAILED] [FAILED] [FAILED] [FAILED] [FAILED] [FAILED] [FAILED] [FAILED] [OK] [OK] 
+[fail]: your strchr does not work with basic input
+Test code:
+	char *src = "the cake is a lie !\0I'm hidden lol\r\n";
+	char *d1 = strchr(src, ' ');
+	char *d2 = ft_strchr(src, ' ');
+
+	if (d1 == d2)
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+      strchr: | cake is a lie !|
+   ft_strchr: | cake is a lie !|
+
+[fail]: your strchr does not work with the first char of input
+Test code:
+	char *src = "the cake is a lie !\0I'm hidden lol\r\n";
+	char *d1 = strchr(src, 't');
+	char *d2 = ft_strchr(src, 't');
+
+	if (d1 == d2)
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+      strchr: |the cake is a lie !|
+   ft_strchr: |the cake is a lie !|
+
+[fail]: your strchr does not work with the char before \0
+Test code:
+	char *src = "the cake is a lie !\0I'm hidden lol\r\n";
+	char *d1 = strchr(src, '!');
+	char *d2 = ft_strchr(src, '!');
+
+	if (d1 == d2)
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+      strchr: |!|
+   ft_strchr: |!|
+
+[fail]: your strchr does not work with not found char
+Test code:
+	char *src = "the cake is a lie !\0I'm hidden lol\r\n";
+	char *d1 = strchr(src, 'x');
+	char *d2 = ft_strchr(src, 'x');
+
+	if (d1 == d2)
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+      strchr: |(null)|
+   ft_strchr: ||
+
+[fail]: your strchr does not work with unicode
+Test code:
+	char *src = "īœ˙ˀ˘¯ˇ¸¯.œ«‘––™ª•¡¶¢˜ˀ";
+	char *d1 = strchr(src, L'–');
+	char *d2 = ft_strchr(src, L'–');
+
+	if (d1 == d2)
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+      strchr: |(null)|
+   ft_strchr: ||
+
+[fail]: your strchr find chars after \0
+Test code:
+	char *src = "AA\0B";
+	char *d1 = strchr(src, 'B');
+	char *d2 = ft_strchr(src, 'B');
+
+	if (d1 == d2)
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+      strchr: |(null)|
+   ft_strchr: ||
+
+[fail]: your strchr does not work with \0
+Test code:
+	char *src = "there is so \0ma\0ny \0 \\0 in t\0his stri\0ng !\0\0\0\0";
+	char *d1 = strchr(src, '\0');
+	char *d2 = ft_strchr(src, '\0');
+
+	if (d1 == d2)
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+      strchr: ||
+   ft_strchr: ||
+
+[fail]: your strchr does not work with \0
+Test code:
+	char *src = "\0";
+	char *d1 = strchr(src, 'a');
+	char *d2 = ft_strchr(src, 'a');
+
+	if (d1 == d2)
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+      strchr: |(null)|
+   ft_strchr: ||
+
+ft_strrchr:    [MISSING]
+ft_strncmp:    [MISSING]
+ft_strlcpy:    [MISSING]
+ft_strlcat:    [MISSING]
+ft_strnstr:    [MISSING]
+ft_atoi:       [MISSING]
+ft_calloc:     [MISSING]
+ft_strdup:     [MISSING]
+ft_substr:     [MISSING]
+ft_strjoin:    [MISSING]
+ft_strtrim:    [MISSING]
+ft_split:      [MISSING]
+ft_itoa:       [MISSING]
+ft_strmapi:    [MISSING]
+ft_putchar_fd: [MISSING]
+ft_putstr_fd:  [MISSING]
+ft_putendl_fd: [MISSING]
+ft_putnbr_fd:  [MISSING]
+ft_lstnew:     [MISSING]
+ft_lstadd_front: [MISSING]
+ft_lstsize:    [MISSING]
+ft_lstlast:    [MISSING]
+ft_lstadd_back:[MISSING]
+ft_lstdelone:  [MISSING]
+ft_lstclear:   [MISSING]
+ft_lstiter:    [MISSING]
+ft_lstmap:     [MISSING]
