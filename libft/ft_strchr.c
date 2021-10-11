@@ -6,15 +6,15 @@
 /*   By: oumali <oumali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 23:25:22 by oumali            #+#    #+#             */
-/*   Updated: 2021/10/08 02:30:30 by oumali           ###   ########.fr       */
+/*   Updated: 2021/10/11 18:49:03 by oumali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char    *ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
-    int		a;
+	int		a;
 	char	*str;
 
 	str = (char *)s;

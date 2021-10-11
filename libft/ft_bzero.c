@@ -6,7 +6,7 @@
 /*   By: oumali <oumali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 09:58:47 by oumali            #+#    #+#             */
-/*   Updated: 2021/10/08 02:55:42 by oumali           ###   ########.fr       */
+/*   Updated: 2021/10/11 18:23:42 by oumali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	ft_bzero(void *b, size_t len)
 {
-    unsigned char   *ptr;
-    size_t             a;
-    
-    a   = 0;
-    ptr = b;
-    while (a < len)
-    {
-        ptr[a] = 0;
-        a++;
-    }
+	unsigned char	*ptr;
+	size_t			a;
+
+	a = 0;
+	ptr = b;
+	while (a < len)
+	{
+		ptr[a] = 0;
+		a++;
+	}
 }
