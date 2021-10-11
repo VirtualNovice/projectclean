@@ -23,7 +23,7 @@ void    *ft_memcpy(void *dest, const void *src, size_t num)
     if (dest == NULL && src == NULL)
         return dest;
 
-    while (a != num)
+    while (a < num)
     {
         cdest[a] = csrc[a];
         a++;

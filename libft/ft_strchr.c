@@ -14,29 +14,18 @@
 
 char    *ft_strchr(const char *s, int c)
 {
-    int a,b;
-    char *str2;
-    int size = ft_strlen(s);
-    
-    str2 = (char*)malloc(size + 1 * sizeof(char));
+    int		a;
+	char	*str;
 
-    a = 0;
-    b = 0;
-    while(s[a] != '\0')
-    {
-        if(s[a] == (unsigned char) c)
-        {   
-            while(s[a] != '\0')
-            {
-                str2[b] = s[a];
-                a++;
-                b++;
-            }
-            str2[b] = '\0';
-            return str2;
-        }
-        a++;
-    }
-    str2[b] = '\0';
-    return str2;
+	str = (char *)s;
+	if (c == '\0')
+		return (str + ft_strlen(str));
+	a = 0;
+	while (str[a] != '\0')
+	{
+		if (str[a] == (char)c)
+			return (str + a);
+		a++;
+	}
+	return (NULL);
 }
