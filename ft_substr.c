@@ -6,11 +6,11 @@ char *ft_substr(char const *s, unsigned int start, size_t len)
     size_t b = 0;
 
     char *sub = (char *)malloc(len + 1 * sizeof(char));
-	
-	if(!sub || !s) 
+    
+    if(sub == NULL || s == NULL) 
         return NULL;
     if(start >= ft_strlen(s))
-        return ft_strdup("");       
+        return sub = "";       
     while(s[a] != '\0')
     {
         if(a == start)
