@@ -6,7 +6,7 @@
 /*   By: oumali <oumali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 03:14:52 by oumali            #+#    #+#             */
-/*   Updated: 2021/10/11 22:01:20 by oumali           ###   ########.fr       */
+/*   Updated: 2021/10/18 21:04:53 by oumali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
 	size_t	a;
 	size_t	dstlen;
-	size_t  srclen;
+	size_t	srclen;
 
 	a = 0;
 	dstlen = ft_strlen(dst);
